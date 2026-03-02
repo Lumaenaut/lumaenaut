@@ -279,6 +279,17 @@ body {
     margin-top: 1rem;
 }
 
+@media (max-width: 600px) {
+    .content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .floating-controls {
+        padding-right: 1rem;
+    }
+}
+
 .footer {
     border-radius: 0px 0px 20px 20px;
     border: 5px solid var(--contrast);
