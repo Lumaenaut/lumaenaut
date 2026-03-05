@@ -69,6 +69,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
 }
 
 .logo-div,
@@ -160,6 +161,38 @@ body {
 
 .blog-btn:hover {
   box-shadow: 2px 2px 0px #99B4EA;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 3px solid var(--contrast);
+  border-radius: 50%;
+  background-color: var(--background-color);
+  color: inherit;
+  cursor: pointer;
+  box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.share-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.4);
+}
+
+.share-btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.share-btn-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
 }
 
 .content {

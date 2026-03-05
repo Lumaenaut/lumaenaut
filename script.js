@@ -104,3 +104,86 @@
   }, 1000);
 })();
 
+(function () {
+  var shareBtn = document.querySelector(".share-btn");
+  if (!shareBtn) return;
+
+  var shareBtnImg = shareBtn.querySelector(".share-btn-icon");
+  if (shareBtnImg && navigator.vendor && navigator.vendor.indexOf("Apple") !== -1) {
+    var iosSrc = shareBtnImg.getAttribute("data-ios-src");
+    if (iosSrc) shareBtnImg.src = iosSrc;
+  }
+
+  function getShareUrl() {
+    var canonical = document.querySelector('link[rel="canonical"]');
+    return (canonical && canonical.href) ? canonical.href : window.location.href;
+  }
+
+  function getShareTitle() {
+    var ogTitle = document.querySelector('meta[property="og:title"]');
+    return (ogTitle && ogTitle.content) ? ogTitle.content : document.title;
+  }
+
+  function getShareText() {
+    var desc = document.querySelector('meta[name="description"]');
+    return (desc && desc.content) ? desc.content : "";
+  }
+
+  shareBtn.addEventListener("click", function () {
+    var url = getShareUrl();
+    var title = getShareTitle();
+    var text = getShareText();
+
+    if (navigator.share) {
+      shareBtn.disabled = true;
+      navigator
+        .share({ title: title, text: text, url: url })
+        .then(function () {
+          var label = shareBtn.getAttribute("aria-label");
+          var img = shareBtn.querySelector(".share-btn-icon");
+          shareBtn.textContent = "Shared";
+          shareBtn.setAttribute("aria-label", "Shared");
+          setTimeout(function () {
+            shareBtn.textContent = "";
+            if (img) shareBtn.appendChild(img);
+            shareBtn.setAttribute("aria-label", label || "Share this page");
+            shareBtn.disabled = false;
+          }, 2000);
+        })
+        .catch(function () {
+          shareBtn.disabled = false;
+        });
+      return;
+    }
+
+    function showCopied() {
+      var img = shareBtn.querySelector(".share-btn-icon");
+      shareBtn.textContent = "Copied!";
+      shareBtn.disabled = true;
+      setTimeout(function () {
+        shareBtn.textContent = "";
+        if (img) shareBtn.appendChild(img);
+        shareBtn.disabled = false;
+      }, 1500);
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(showCopied);
+      return;
+    }
+
+    var ta = document.createElement("textarea");
+    ta.value = url;
+    ta.setAttribute("readonly", "");
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      showCopied();
+    } catch (e) {}
+    document.body.removeChild(ta);
+  });
+})();
+
