@@ -423,7 +423,19 @@ html.safari .hero-ascii {
   }
 
   .header-right {
+    position: relative;
     justify-content: center;
+  }
+
+  .header-right .share-btn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+  }
+
+  .header-right .share-btn:hover {
+    transform: translateX(-50%) translate(2px, 2px);
   }
 }
 
