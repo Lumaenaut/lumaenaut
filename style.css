@@ -144,46 +144,6 @@ body {
     overflow-y: auto;
 }
 
-.floating-controls {
-    position: sticky;
-    top: 0;
-    right: inherit;
-    z-index: 5;
-
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
-
-    padding: 0.5rem 2rem 0.5rem;
-    margin-bottom: 0.5rem;
-    background-color: var(--background-color);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
-    transition: transform 180ms ease;
-    will-change: transform;
-}
-
-.floating-controls.is-hidden {
-    transform: translateY(-140%);
-}
-
-.toggle-track {
-    width: 44px;
-    height: 24px;
-    border: 2px solid var(--contrast);
-    border-radius: 999px;
-    background-color: #ddd;
-    display: flex;
-    align-items: center;
-    padding: 2px;
-}
-
-.toggle-thumb {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: var(--contrast);
-}
-
 .post {
     max-width: 38rem;
     margin: 0 auto;
@@ -313,11 +273,6 @@ html.safari .hero-ascii {
 
 @media (max-width: 600px) {
     .content {
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
-
-    .floating-controls {
         padding-left: 1rem;
         padding-right: 1rem;
     }
